@@ -1,7 +1,7 @@
 Flask==2.3.3
-gTTS==2.5.1
-python-dotenv==1.0.1
-requests==2.31.0
-opencv-python
+gunicorn==21.2.0
+numpy==1.24.4
+pandas==2.0.3
+opencv-python-headless==4.11.0.86
 deepface==0.0.75
 tensorflow==2.10.1
