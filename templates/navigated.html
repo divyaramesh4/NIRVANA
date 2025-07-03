@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="\static\css\navigatedstyle.css">
+    <link rel="stylesheet" href="\static\css\navigatedvars.css">
+
+ <style>
+ a, button, input, select, h1, h2, h3, h4, h5, * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+border: none;
+text-decoration: none;
+background: none;
+}
+menu, ol, ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+}
+
+/* Style for the input field */
+.name-input {
+width: 100%;
+padding: 10px;
+border-radius: 8px;
+margin-top: 10px;
+font-size: 20px;
+background: #f2ff9f;
+color: rgba(69, 69, 68, 0.8);
+outline: none;
+}
+</style>
+ <title>Navigation Page</title>
+</head>
+<body>
+ <div class="navigation-page">
+ <div class="nav">
+ <div class="frame-3">
+ <div class="frame-1">
+ <div class="how-do-i-address-you">How do I address you?</div>
+ <div class="take-a-deep-breath-begin-when-you-are-ready">
+ Take a deep breath, begin when you are ready
+ </div>
+ </div>
+<div class="group-1">
+ <div class="frame-2">
+ <input type="text" class="name-input" placeholder="Enter your name" id="nameInput">
+ </div>
+ </div>
+ </div>
+<div class="frame-8">
+ <div class="nirvana">Nirvana.</div>
+ <div class="frame-4">
+ <div class="log-in">Log In</div>
+ </div>
+ </div>
+ <div class="bot"></div>
+ </div>
+ </div>
+
+ <script>
+ document.addEventListener("DOMContentLoaded", function () {
+ const nameInput = document.getElementById("nameInput");
+
+ nameInput.addEventListener("keydown", function (event) {
+ if (event.key === "Enter" && nameInput.value.trim() !== "") {
+ localStorage.setItem("userName", nameInput.value.trim());
+ window.location.href = "{{ url_for('homepage') }}";
+ }
+});
+ });
+</script>
+ <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.92/build/spline-viewer.js"></script>
+<spline-viewer url="https://prod.spline.design/MfOdyIu8WsIinfNA/scene.splinecode"></spline-viewer>
+</body>
+</html>
