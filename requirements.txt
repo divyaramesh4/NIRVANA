@@ -1,0 +1,7 @@
+Flask==2.3.3
+gTTS==2.5.1
+python-dotenv==1.0.1
+requests==2.31.0
+opencv-python
+deepface==0.0.75
+tensorflow==2.12.0
