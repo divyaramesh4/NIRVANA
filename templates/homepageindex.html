@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nirvana Chatbot</title>
+    <link rel="stylesheet" href="\static\css\homepagevars.css" />
+    <link rel="stylesheet" href="\static\css\homepagevars.css" />
+    <style>
+      #webcam {
+        width: 100%;
+        border-radius: 12px;
+        display: none; /* Initially hide the webcam */
+      }
+
+      .microphone,
+      .paper-plane {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+      }
+
+      .content-container {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        justify-content: center;
+        align-items: flex-start;
+        padding-top: 60px;
+      }
+
+      .main-page,
+      .main-page * {
+        box-sizing: border-box;
+      }
+
+      .main-page {
+        background: #ebeff6;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .web-cam-box {
+        background: radial-gradient(
+          closest-side,
+          rgba(143, 188, 239, 1) 0%,
+          rgba(181, 208, 243, 1) 51.42%,
+          rgba(232, 237, 246, 1) 100%
+        );
+        border-radius: 30px;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 564px;
+        height: 696px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        position: relative; /* Make it a positioning context for the overlay */
+        overflow: hidden; /* Clip the webcam if it somehow shows before button click */
+      }
+
+      .webcam-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(235, 239, 246, 0.8); /* Semi-transparent background */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+        cursor: pointer;
+      }
+
+      .detect-mood-button {
+        background: #f2ff9f;
+        border-radius: 60px;
+        padding: 14px 22px;
+        color: #454544;
+        text-align: center;
+        font-family: "Poppins-Medium", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+
+      .chat-box {
+        background: #f5f5f5;
+        border-radius: 30px;
+        padding: 26px; /* Added padding to the chat box */
+        display: flex;
+        flex-direction: column; /* Changed to column */
+        gap: 10px;
+        width: 584px;
+        height: 696px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        justify-content: space-between; /* Distribute space between content and input */
+      }
+
+      .chat-page-inside {
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Make it take full height of chat-box */
+      }
+
+      .frame-2 {
+        display: flex;
+        flex-direction: row;
+        gap: 2px;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .speak {
+        background: #ebeff6;
+        border-radius: 21px;
+        padding: 9px 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        box-shadow: 0px 4px 5.5px rgba(0, 0, 0, 0.25);
+        object-fit: cover;
+      }
+
+      .frame-23 {
+        flex-grow: 1;
+      }
+
+      .frame-12 {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        width: 100%; /* Make input take full width */
+      }
+
+      .rectangle-3 {
+        background: #ebeff6;
+        border-radius: 60px;
+        height: 42px;
+        box-shadow: 0px 4px 5.5px rgba(0, 0, 0, 0.25);
+        width: 100%;
+        padding-left: 15px; /* Add some padding for the text */
+      }
+
+      .send {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+      }
+
+      .paper-plane {
+        height: 26px;
+      }
+
+      /* Styles to handle the "back" navigation */
+      .web-cam-box:target {
+        display: flex; /* Show the webcam box */
+      }
+
+      .chat-box {
+        /* Initially show the chat box */
+        /* You might want to hide it initially if the webcam is the first thing */
+      }
+
+      .speak a {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-page">
+      <div class="content-container">
+        <div id="web-cam-box" class="web-cam-box">
+          <div class="webcam-overlay" id="webcamOverlay">
+            <script
+              type="module"
+              src="https://unpkg.com/@splinetool/viewer@1.9.92/build/spline-viewer.js"
+            ></script>
+            <spline-viewer
+              url="https://prod.spline.design/MfOdyIu8WsIinfNA/scene.splinecode"
+            ></spline-viewer>
+            <button class="detect-mood-button" id="detectMoodButton">
+              Detect Mood
+            </button>
+          </div>
+          <video id="webcam" autoplay playsinline></video>
+          <div id="voice-container" style="display: none">
+            <p>Voice Input Activated</p>
+          </div>
+        </div>
+
+        <div id="chat-box" class="chat-box">
+          <div class="chat-page-inside">
+            <div
+              id="messages"
+              style="padding: 10px; overflow-y: auto; flex-grow: 1"
+            ></div>
+            <div class="frame-2">
+              <div class="speak">
+                <img class="microphone" src="/static/microphone0.png" />
+              </div>
+              <div class="frame-23">
+                <div class="frame-12">
+                  <input
+                    class="rectangle-3"
+                    type="text"
+                    placeholder="Talk to me..."
+                  />
+                </div>
+              </div>
+              <div class="send">
+                <img class="paper-plane" src="/static/paper-plane0.png" />
+              </div>
+            </div>
+            <audio id="voice" hidden></audio>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const video = document.getElementById("webcam");
+      const input = document.querySelector(".rectangle-3");
+      const messages = document.getElementById("messages");
+      const voice = document.getElementById("voice");
+      const webcamOverlay = document.getElementById("webcamOverlay");
+      const detectMoodButton = document.getElementById("detectMoodButton");
+      let emotion = "neutral";
+      let webcamActive = false;
+      let isVoiceEnabled = true; // Add this at the top of your script
+
+      function appendMessage(text, sender = "🤖") {
+        const div = document.createElement("div");
+        div.textContent = `${sender}: ${text}`; // FIXED!
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+      }
+
+      function playAudio(url) {
+        if (url && isVoiceEnabled) {
+          voice.src = url;
+          voice.play().catch((e) => console.error("Audio error:", e));
+        }
+      }
+
+      async function enableWebcam() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+          });
+          video.srcObject = stream;
+          video.style.display = "block";
+          webcamOverlay.style.display = "none";
+          webcamActive = true;
+
+          setTimeout(() => {
+            detectEmotion();
+          }, 1000);
+        } catch (err) {
+          console.error("Webcam access denied:", err);
+          alert("Please allow webcam access to detect your mood.");
+        }
+      }
+
+      function detectEmotion() {
+        if (webcamActive && video.srcObject) {
+          const canvas = document.createElement("canvas");
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          const context = canvas.getContext("2d");
+          context.drawImage(video, 0, 0);
+          const image = canvas.toDataURL("image/jpeg");
+
+          fetch("/detect-emotion", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ image }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              emotion = data.emotion;
+              appendMessage(data.response); // Modified this line
+              playAudio(data.audio_url);
+            })
+            .catch((err) => console.error("Error sending image:", err));
+        } else {
+          alert("Webcam not active.");
+        }
+      }
+
+      function sendMessage() {
+        const message = input.value.trim();
+        if (!message) return;
+        appendMessage(message, "🧑");
+        input.value = "";
+        fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message, emotion }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            appendMessage(data.response); // Modified this line
+            playAudio(data.audio_url);
+          });
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const userName = localStorage.getItem("userName");
+        if (userName) {
+          appendMessage(`Welcome, ${userName}!`, "👋");
+        }
+      });
+
+      detectMoodButton.addEventListener("click", enableWebcam);
+
+      document
+        .querySelector(".paper-plane")
+        .addEventListener("click", sendMessage);
+
+      input.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      });
+      
+      document.querySelector(".microphone").addEventListener("click", () => {
+        isVoiceEnabled = !isVoiceEnabled; // Flip the state
+
+        if (!isVoiceEnabled) {
+          if (voice.currentTime > 0 && !voice.paused) {
+            voice.pause();
+            voice.currentTime = 0;
+          }
+          console.log("Voice output turned OFF.");
+        } else {
+          console.log("Voice output turned ON.");
+        }
+        if (video) video.style.display = "none";
+        if (webcamOverlay) webcamOverlay.style.display = "flex";
+
+        if (video && video.srcObject) {
+          const tracks = video.srcObject.getTracks();
+          tracks.forEach((track) => track.stop());
+          video.srcObject = null;
+        }
+        webcamActive = false;
+      });
+    </script>
+  </body>
+</html>
