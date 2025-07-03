@@ -1,0 +1,262 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f2f6fc;
+    margin: 0;
+    padding: 0;
+}
+spline-viewer {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 650px;
+    top: 10px;
+
+}
+#webcam {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.microphone,
+.paper-plane {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 60px;
+}
+
+.main-page,
+.main-page * {
+    box-sizing: border-box;
+}
+.main-page {
+    background: #ebeff6;
+    min-height: 100vh; /* Changed height to min-height to accommodate content */
+    position: relative;
+    overflow: hidden;
+}
+.main-page2 {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 1187px;
+    position: absolute;
+    left: 146px;
+    top: 117px;
+}
+.nirvana {
+    color: #5085c3;
+    text-align: left;
+    font-family: "Poppins-Bold", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    position: relative;
+    align-self: stretch;
+    height: 37px;
+}
+.main-page-segmets {
+    flex-shrink: 0;
+    width: 1187px;
+    height: 702px;
+    position: static;
+}
+.web-cam-box {
+    background: radial-gradient(
+        closest-side,
+        rgba(143, 188, 239, 1) 0%,
+        rgba(181, 208, 243, 1) 51.42841339111328%,
+        rgba(232, 237, 246, 1) 100%
+    );}
+
+
+.message {
+    font-size: 15px;
+    color: #454544; /* Removed the extra colon */
+    font-family: 'Poppins', sans-serif; /* Fixed font declaration */
+    margin-bottom: 10px;
+    text-align: left;
+    max-width: 90%;
+}
+
+.checkin {
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif; /* Fixed font declaration */
+    font-weight: 600;
+    color: #454544;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.detect-mood {
+    color: #454544;
+    text-align: left;
+    font-family: "Poppins-Medium", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+.chat-box {
+    background: #f5f5f5;
+    border-radius: 30px;
+    padding: 26px; /* Added padding */
+    display: flex;
+    flex-direction: column; /* Changed to column */
+    gap: 10px;
+    width: 584px;
+    height: 696px;
+    position: absolute;
+    left: 603px;
+    top: 60px; /* Adjusted top to align with webcam box */
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    justify-content: space-between; /* Distribute space */
+}
+.chat-page-inside {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Take full height */
+}
+#messages {
+    padding: 10px;
+    overflow-y: auto;
+    flex-grow: 1; /* Messages take available space */
+}
+.rectangle-5 {
+    background: #ebeff6;
+    border-radius: 60px;
+    align-self: stretch;
+    flex-shrink: 0;
+    height: 42px;
+    position: relative;
+    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.25);
+}
+.frame-2 {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-shrink: 0;
+    position: relative;
+}
+.speak {
+    background: #ebeff6;
+    border-radius: 21px;
+    padding: 9px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    position: relative;
+    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.25);
+    object-fit: cover;
+
+}
+
+.frame-22 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    width: 508px;
+    position: relative;
+}
+.frame-23 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-shrink: 0;
+    position: relative;
+}
+.frame-12 {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%; /* Make input take full width */
+}
+.rectangle-3 {
+    background: #ebeff6;
+    border-radius: 60px;
+    height: 42px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.25);
+    padding-left: 15px; /* Add some padding for the text */
+}
+.send {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 50px;
+    position: absolute;
+    right: 10px; /* Align to the right */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for centering */
+}
+.paper-plane {
+    align-self: stretch;
+    flex-shrink: 0;
+    height: 26px;
+    position: relative;
+    object-fit: cover;
+}
+
+/* Styles to handle the "back" navigation */
+#web-cam-box:target {
+    display: flex; /* Show the webcam box */
+}
+
+#chat-box {
+    /* Initially show the chat box */
+    /* You might want to hide it initially if the webcam is the first thing */
+}
+
+.speak a {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Initially hide the webcam box so the chat is visible */
+/* If you want the webcam to be visible first, remove this */
+#web-cam-box {
+    display: none;
+}
+
+/* Style the chat box to be visible initially */
+#chat-box {
+    display: flex;
+}
+
+/* When the microphone button (link) is clicked and targets the webcam box,
+   hide the chat box. */
+#web-cam-box:target ~ .content-container > #chat-box {
+    display: none;
+}
+
+/* Style the microphone button as a link */
+.speak a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
+}
